@@ -10,6 +10,13 @@ using Microsoft.EntityFrameworkCore;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
+var environment = builder.Environment.EnvironmentName;
+
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
 
 // Add services to the container.
 
@@ -66,8 +73,8 @@ builder.Services.AddMassTransit(x =>
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("rabbitmq://localhost");
-        var uniqueQueueName = $"holidays-cmd-{Guid.NewGuid():N}";
-        cfg.ReceiveEndpoint(uniqueQueueName, e =>
+        var queueName = builder.Configuration["MassTransit:QueueName"];
+        cfg.ReceiveEndpoint(queueName, e =>
         {
             e.ConfigureConsumer<HolidayPeriodConsumer>(context);
             e.ConfigureConsumer<HolidayPlanConsumer>(context);
