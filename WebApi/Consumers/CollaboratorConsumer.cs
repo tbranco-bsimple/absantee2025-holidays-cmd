@@ -10,6 +10,7 @@ public class CollaboratorConsumer : IConsumer<CollaboratorCreatedMessage>
     {
         _collaboratorService = collaboratorService;
     }
+
     public async Task Consume(ConsumeContext<CollaboratorCreatedMessage> context)
     {
         var senderId = context.Headers.Get<string>("SenderId");

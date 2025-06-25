@@ -10,6 +10,7 @@ public class HolidayPeriodConsumer : IConsumer<HolidayPeriodCreatedMessage>
     {
         _holidayPlanService = holidayPlanService;
     }
+
     public async Task Consume(ConsumeContext<HolidayPeriodCreatedMessage> context)
     {
         var senderId = context.Headers.Get<string>("SenderId");
