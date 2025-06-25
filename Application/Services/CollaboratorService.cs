@@ -27,8 +27,7 @@ public class CollaboratorService
 
         var collaborator = _collaboratorFactory.Create(visitor);
 
-        await _collaboratorRepository.AddCollaboratorAsync(collaborator);
-        await _collaboratorRepository.SaveChangesAsync();
+        await _collaboratorRepository.AddAsync(collaborator);
     }
 
 }

@@ -65,7 +65,12 @@ builder.Services.AddMassTransit(x =>
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("rabbitmq://localhost");
-        cfg.ConfigureEndpoints(context);
+        cfg.ReceiveEndpoint("holidays-cmd", e =>
+        {
+            e.ConfigureConsumer<HolidayPeriodConsumer>(context);
+            e.ConfigureConsumer<HolidayPlanConsumer>(context);
+            e.ConfigureConsumer<CollaboratorConsumer>(context);
+        });
     });
 });
 
