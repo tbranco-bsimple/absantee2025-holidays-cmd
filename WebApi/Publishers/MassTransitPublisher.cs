@@ -1,5 +1,5 @@
 using Domain.Models;
-using WebApi.Messages;
+using Domain.Messages;
 using MassTransit;
 using Domain.Interfaces;
 

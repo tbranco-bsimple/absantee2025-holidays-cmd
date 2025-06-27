@@ -1,5 +1,5 @@
 using Domain.Models;
 
-namespace WebApi.Messages;
+namespace Domain.Messages;
 
 public record HolidayPeriodCreatedMessage(Guid HolidayPlanId, Guid Id, PeriodDate PeriodDate);

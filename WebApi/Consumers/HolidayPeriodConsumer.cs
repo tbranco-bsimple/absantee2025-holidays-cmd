@@ -1,5 +1,5 @@
 using Application.Services;
-using WebApi.Messages;
+using Domain.Messages;
 using MassTransit;
 
 public class HolidayPeriodConsumer : IConsumer<HolidayPeriodCreatedMessage>
