@@ -8,9 +8,9 @@ namespace WebApi.Controllers;
 [ApiController]
 public class HolidayPlanController : ControllerBase
 {
-    private readonly HolidayPlanService _holidayPlanService;
+    private readonly IHolidayPlanService _holidayPlanService;
 
-    public HolidayPlanController(HolidayPlanService holidayPlanService)
+    public HolidayPlanController(IHolidayPlanService holidayPlanService)
     {
         _holidayPlanService = holidayPlanService;
     }

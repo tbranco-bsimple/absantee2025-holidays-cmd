@@ -4,9 +4,9 @@ using MassTransit;
 
 public class CollaboratorConsumer : IConsumer<CollaboratorCreatedMessage>
 {
-    private readonly CollaboratorService _collaboratorService;
+    private readonly ICollaboratorService _collaboratorService;
 
-    public CollaboratorConsumer(CollaboratorService collaboratorService)
+    public CollaboratorConsumer(ICollaboratorService collaboratorService)
     {
         _collaboratorService = collaboratorService;
     }

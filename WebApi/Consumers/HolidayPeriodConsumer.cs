@@ -4,9 +4,9 @@ using MassTransit;
 
 public class HolidayPeriodConsumer : IConsumer<HolidayPeriodCreatedMessage>
 {
-    private readonly HolidayPlanService _holidayPlanService;
+    private readonly IHolidayPlanService _holidayPlanService;
 
-    public HolidayPeriodConsumer(HolidayPlanService holidayPlanService)
+    public HolidayPeriodConsumer(IHolidayPlanService holidayPlanService)
     {
         _holidayPlanService = holidayPlanService;
     }

@@ -8,7 +8,7 @@ using Domain.Interfaces;
 
 namespace Application.Services;
 
-public class HolidayPlanService
+public class HolidayPlanService : IHolidayPlanService
 {
     private readonly IHolidayPlanRepository _holidayPlanRepository;
     private readonly IHolidayPlanFactory _holidayPlanFactory;
@@ -35,10 +35,7 @@ public class HolidayPlanService
             var holidayPlan = await _holidayPlanFactory.Create(collaborator, []);
             await _holidayPlanRepository.AddHolidayPlanAsync(holidayPlan);
 
-            var holidayPeriods = holidayPlan.HolidayPeriods
-                .Cast<HolidayPeriod>()
-                .ToList();
-            await _messagePublisher.PublishCreatedHolidayPlanMessageAsync(holidayPlan.Id, holidayPlan.CollaboratorId, holidayPeriods);
+            await _messagePublisher.PublishCreatedHolidayPlanMessageAsync(holidayPlan.Id, holidayPlan.CollaboratorId, holidayPlan.HolidayPeriods);
 
             var result = _mapper.Map<HolidayPlan, HolidayPlanDTO>(holidayPlan);
             return Result<HolidayPlanDTO>.Success(result);
@@ -70,9 +67,9 @@ public class HolidayPlanService
         }
     }
 
-    public async Task SubmitHolidayPlanAsync(Guid id, Guid collabId, List<HolidayPeriod> holidayPeriods)
+    public async Task SubmitHolidayPlanAsync(Guid id, Guid collabId, List<IHolidayPeriod> holidayPeriods)
     {
-        var holidayPeriodsDataModel = _mapper.Map<List<HolidayPeriod>, List<HolidayPeriodDataModel>>(holidayPeriods);
+        var holidayPeriodsDataModel = _mapper.Map<List<IHolidayPeriod>, List<HolidayPeriodDataModel>>(holidayPeriods);
         var visitor = new HolidayPlanDataModel()
         {
             Id = id,

@@ -27,8 +27,8 @@ builder.Services.AddDbContext<AbsanteeContext>(opt =>
     );
 
 //Services
-builder.Services.AddTransient<HolidayPlanService>();
-builder.Services.AddTransient<CollaboratorService>();
+builder.Services.AddTransient<IHolidayPlanService, HolidayPlanService>();
+builder.Services.AddTransient<ICollaboratorService, CollaboratorService>();
 
 //Repositories
 builder.Services.AddTransient<IHolidayPlanRepository, HolidayPlanRepositoryEF>();

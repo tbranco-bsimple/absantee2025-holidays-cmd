@@ -21,9 +21,9 @@ public class MassTransitPublisher : IMessagePublisher
             });
     }
 
-    public async Task PublishCreatedHolidayPlanMessageAsync(Guid id, Guid collabId, List<HolidayPeriod> holidayPeriods)
+    public async Task PublishCreatedHolidayPlanMessageAsync(Guid id, Guid collaboratorId, List<IHolidayPeriod> holidayPeriods)
     {
-        await _publishEndpoint.Publish(new HolidayPlanCreatedMessage(id, collabId, holidayPeriods),
+        await _publishEndpoint.Publish(new HolidayPlanCreatedMessage(id, collaboratorId, holidayPeriods),
             context =>
             {
                 context.Headers.Set("SenderId", InstanceInfo.InstanceId);
