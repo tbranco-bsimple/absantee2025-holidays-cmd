@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Application.DTO;
 using Domain.Models;
 
-namespace WebApi.IntegrationTests.Helpers
+namespace InterfaceAdapters.IntegrationTests.Helpers
 {
     public static class HolidayPlanHelper
     {

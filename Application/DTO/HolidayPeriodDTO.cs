@@ -10,4 +10,10 @@ public record HolidayPeriodDTO
     public HolidayPeriodDTO()
     {
     }
+
+    public HolidayPeriodDTO(Guid id, PeriodDate periodDate)
+    {
+        Id = id;
+        PeriodDate = periodDate;
+    }
 }

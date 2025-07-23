@@ -9,7 +9,7 @@ public interface IHolidayPlanService
     public Task<Result<HolidayPeriodDTO>> AddHolidayPeriod(Guid collabId, CreateHolidayPeriodDTO holidayPeriodDTO);
     public Task SubmitHolidayPlanAsync(Guid id, Guid collabId, List<IHolidayPeriod> holidayPeriods);
     public Task SubmitHolidayPeriodAsync(Guid holidayPlanId, Guid id, PeriodDate periodDate);
-    public Task<HolidayPeriod> UpdateHolidayPeriodForCollaborator(Guid collabId, HolidayPeriodDTO periodDTO);
+    public Task<Result<HolidayPeriodDTO>> UpdateHolidayPeriodForCollaborator(Guid collabId, HolidayPeriodDTO periodDTO);
 
 }
 

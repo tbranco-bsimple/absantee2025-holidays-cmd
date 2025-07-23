@@ -5,7 +5,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Instance1"
       },
-      "applicationUrl": "http://localhost:5001",
+      "applicationUrl": "http://localhost:5101",
       "dotnetRunMessages": true
     },
     "Instance2": {
@@ -13,7 +13,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Instance2"
       },
-      "applicationUrl": "http://localhost:5002",
+      "applicationUrl": "http://localhost:5102",
       "dotnetRunMessages": true
     },
     "Instance3": {
@@ -21,7 +21,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Instance3"
       },
-      "applicationUrl": "http://localhost:5003",
+      "applicationUrl": "http://localhost:5103",
       "dotnetRunMessages": true
     },
   },

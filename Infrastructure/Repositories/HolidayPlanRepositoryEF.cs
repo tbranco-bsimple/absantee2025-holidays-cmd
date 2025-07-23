@@ -120,4 +120,15 @@ public class HolidayPlanRepositoryEF : GenericRepositoryEF<IHolidayPlan, Holiday
 
         return _mapper.Map<HolidayPlanDataModel, HolidayPlan>(hpDm);
     }
+
+    public async Task<HolidayPeriod?> GetHolidayPeriodByIdAsync(Guid holidayPeriodId)
+    {
+        var hpDM = await _context.Set<HolidayPeriodDataModel>().FirstOrDefaultAsync(hp => hp.Id == holidayPeriodId);
+
+        if (hpDM == null)
+            return null;
+
+        var hp = _mapper.Map<HolidayPeriodDataModel, HolidayPeriod>(hpDM);
+        return hp;
+    }
 }

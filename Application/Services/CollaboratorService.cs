@@ -19,13 +19,21 @@ public class CollaboratorService : ICollaboratorService
 
     public async Task SubmitCollaboratorAsync(Guid id, PeriodDateTime periodDateTime)
     {
+        var collaborator = await _collaboratorRepository.GetByIdAsync(id);
+
+        if (collaborator != null)
+        {
+            Console.WriteLine($"CollaboratorConsumed not added, already exists with Id: {id}");
+            return;
+        }
+
         var visitor = new CollaboratorDataModel()
         {
             Id = id,
             PeriodDateTime = periodDateTime
         };
 
-        var collaborator = _collaboratorFactory.Create(visitor);
+        collaborator = _collaboratorFactory.Create(visitor);
 
         await _collaboratorRepository.AddAsync(collaborator);
     }

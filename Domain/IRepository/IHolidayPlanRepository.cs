@@ -12,5 +12,5 @@ public interface IHolidayPlanRepository : IGenericRepositoryEF<IHolidayPlan, Hol
     public Task<HolidayPeriod> AddHolidayPeriodAsync(Guid holidayPlanId, HolidayPeriod holidayPeriod);
     public Task<HolidayPeriod> UpdateHolidayPeriodAsync(Guid collabId, HolidayPeriod holidayPeriod);
     public Task<HolidayPlan?> GetHolidayPlanByCollaboratorAsync(Guid collabId);
-
+    public Task<HolidayPeriod?> GetHolidayPeriodByIdAsync(Guid holidayPeriodId);
 }

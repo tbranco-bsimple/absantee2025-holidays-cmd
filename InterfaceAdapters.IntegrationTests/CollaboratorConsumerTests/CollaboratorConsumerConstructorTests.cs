@@ -1,7 +1,7 @@
 using Moq;
 using Xunit;
 
-namespace WebApi.IntegrationTests.CollaboratorConsumerTests;
+namespace InterfaceAdapters.IntegrationTests.CollaboratorConsumerTests;
 
 public class CollaboratorConsumerConstructorTests
 {

@@ -5,7 +5,7 @@ using MassTransit;
 using Moq;
 using Xunit;
 
-namespace WebApi.IntegrationTests.MassTransitPublisherTests;
+namespace InterfaceAdapters.IntegrationTests.MassTransitPublisherTests;
 
 public class MassTransitPublishPublishCreatedHolidayPlanMessageAsyncTests
 {

@@ -2,7 +2,7 @@ using Application.DTO;
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers;
+namespace InterfaceAdapters.Controllers;
 
 [Route("api/holidays")]
 [ApiController]
@@ -32,11 +32,11 @@ public class HolidayPlanController : ControllerBase
     }
 
     [HttpPut("{collaboratorId}/holidayPeriod")]
-    public async Task<ActionResult<IEnumerable<HolidayPeriodDTO>>> UpdateHolidayPeriodsOfCollaborator(Guid collaboratorId, [FromBody] HolidayPeriodDTO hp)
+    public async Task<ActionResult<HolidayPeriodDTO>> UpdateHolidayPeriodsOfCollaborator(Guid collaboratorId, [FromBody] HolidayPeriodDTO hp)
     {
         var result = await _holidayPlanService.UpdateHolidayPeriodForCollaborator(collaboratorId, hp);
 
-        return Ok(result);
+        return result.ToActionResult();
     }
 
 }

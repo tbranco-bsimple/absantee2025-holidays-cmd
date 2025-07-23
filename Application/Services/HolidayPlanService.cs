@@ -69,6 +69,14 @@ public class HolidayPlanService : IHolidayPlanService
 
     public async Task SubmitHolidayPlanAsync(Guid id, Guid collabId, List<IHolidayPeriod> holidayPeriods)
     {
+        var holidayPlan = await _holidayPlanRepository.GetByIdAsync(id);
+
+        if (holidayPlan != null)
+        {
+            Console.WriteLine($"HolidayPlanConsumed not added, already exists with Id: {id}");
+            return;
+        }
+
         var holidayPeriodsDataModel = _mapper.Map<List<IHolidayPeriod>, List<HolidayPeriodDataModel>>(holidayPeriods);
         var visitor = new HolidayPlanDataModel()
         {
@@ -77,28 +85,46 @@ public class HolidayPlanService : IHolidayPlanService
             HolidayPeriods = holidayPeriodsDataModel
         };
 
-        var holidayPlan = _holidayPlanFactory.Create(visitor);
+        holidayPlan = _holidayPlanFactory.Create(visitor);
 
         await _holidayPlanRepository.AddAsync(holidayPlan);
     }
 
     public async Task SubmitHolidayPeriodAsync(Guid holidayPlanId, Guid id, PeriodDate periodDate)
     {
+        var holidayPeriod = await _holidayPlanRepository.GetHolidayPeriodByIdAsync(id);
+
+        if (holidayPeriod != null)
+        {
+            Console.WriteLine($"HolidayPeriodConsumed not added, already exists with Id: {id}");
+            return;
+        }
+
         var visitor = new HolidayPeriodDataModel()
         {
             Id = id,
             PeriodDate = periodDate
         };
 
-        var holidayPeriod = _holidayPeriodFactory.Create(visitor);
+        holidayPeriod = _holidayPeriodFactory.Create(visitor);
 
         await _holidayPlanRepository.AddHolidayPeriodAsync(holidayPlanId, holidayPeriod);
     }
 
-    public async Task<HolidayPeriod> UpdateHolidayPeriodForCollaborator(Guid collabId, HolidayPeriodDTO periodDTO)
+    public async Task<Result<HolidayPeriodDTO>> UpdateHolidayPeriodForCollaborator(Guid collabId, HolidayPeriodDTO periodDTO)
     {
-        var period = _mapper.Map<HolidayPeriodDTO, HolidayPeriod>(periodDTO);
-        return await _holidayPlanRepository.UpdateHolidayPeriodAsync(collabId, period);
-    }
+        try
+        {
+            var period = _mapper.Map<HolidayPeriodDTO, HolidayPeriod>(periodDTO);
+            var updatedResult = await _holidayPlanRepository.UpdateHolidayPeriodAsync(collabId, period);
 
+            var result = new HolidayPeriodDTO(updatedResult.Id, updatedResult.PeriodDate);
+
+            return Result<HolidayPeriodDTO>.Success(result);
+        }
+        catch (Exception e)
+        {
+            return Result<HolidayPeriodDTO>.Failure(Error.InternalServerError(e.Message));
+        }
+    }
 }

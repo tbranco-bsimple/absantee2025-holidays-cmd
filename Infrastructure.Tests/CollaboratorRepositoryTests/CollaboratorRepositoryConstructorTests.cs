@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using AutoMapper;
 
-namespace Infrastructure.Tests.HolidayPlanRepositoryTests;
+namespace Infrastructure.Tests.CollaboratorRepositoryTests;
 
-public class HolidayPlanRepositoryConstructorTests
+public class CollaboratorRepositoryConstructorTests
 {
     [Fact]
     public void WhenNotPassingAnyArguments_ThenObjectIsCreated()
@@ -16,7 +16,7 @@ public class HolidayPlanRepositoryConstructorTests
         var mockMapper = new Mock<IMapper>();
 
         //Act
-        new HolidayPlanRepositoryEF(contextDouble.Object, mockMapper.Object);
+        new CollaboratorRepositoryEF(contextDouble.Object, mockMapper.Object);
 
         //Assert
     }

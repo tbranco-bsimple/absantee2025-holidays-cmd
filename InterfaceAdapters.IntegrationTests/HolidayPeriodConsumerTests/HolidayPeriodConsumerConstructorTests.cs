@@ -1,9 +1,9 @@
 using Moq;
 using Xunit;
 
-namespace WebApi.IntegrationTests.HolidayPlanConsumerTests;
+namespace InterfaceAdapters.IntegrationTests.HolidayPeriodConsumerTests;
 
-public class HolidayPlanConsumerConstructorTests
+public class HolidayPeriodConsumerConstructorTests
 {
     [Fact]
     public void WhenConstructorIsCalled_ThenObjectIsInstantiated()
@@ -12,7 +12,7 @@ public class HolidayPlanConsumerConstructorTests
         var serviceMock = new Mock<IHolidayPlanService>();
 
         // Act
-        new HolidayPlanConsumer(serviceMock.Object);
+        new HolidayPeriodConsumer(serviceMock.Object);
 
         // Assert
     }

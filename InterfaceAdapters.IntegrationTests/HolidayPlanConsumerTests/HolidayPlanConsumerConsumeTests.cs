@@ -5,7 +5,7 @@ using MassTransit;
 using Moq;
 using Xunit;
 
-namespace WebApi.IntegrationTests.HolidayPlanConsumerTests;
+namespace InterfaceAdapters.IntegrationTests.HolidayPlanConsumerTests;
 
 public class HolidayPlanConsumerConsumeTests
 {
