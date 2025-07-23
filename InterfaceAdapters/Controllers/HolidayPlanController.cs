@@ -32,9 +32,9 @@ public class HolidayPlanController : ControllerBase
     }
 
     [HttpPut("{collaboratorId}/holidayPeriod")]
-    public async Task<ActionResult<HolidayPeriodDTO>> UpdateHolidayPeriodsOfCollaborator(Guid collaboratorId, [FromBody] HolidayPeriodDTO hp)
+    public async Task<ActionResult<HolidayPeriodDTO>> UpdateHolidayPeriodsOfCollaborator([FromBody] HolidayPeriodDTO hp)
     {
-        var result = await _holidayPlanService.UpdateHolidayPeriodForCollaborator(collaboratorId, hp);
+        var result = await _holidayPlanService.UpdateHolidayPeriod(hp);
 
         return result.ToActionResult();
     }

@@ -66,11 +66,11 @@ public class HolidayPlanRepositoryEF : GenericRepositoryEF<IHolidayPlan, Holiday
         return _mapper.Map<HolidayPeriodDataModel, HolidayPeriod>(dataModel);
     }
 
-    public async Task<HolidayPeriod> UpdateHolidayPeriodAsync(Guid collabId, HolidayPeriod holidayPeriod)
+    public async Task<HolidayPeriod> UpdateHolidayPeriodAsync(Guid holidayPeriodId, HolidayPeriod holidayPeriod)
     {
         var holidayPlan = await _context.Set<HolidayPlanDataModel>()
             .Include(h => h.HolidayPeriods)
-            .FirstOrDefaultAsync(h => h.CollaboratorId == collabId);
+            .FirstOrDefaultAsync(h => h.HolidayPeriods.Any(p => p.Id == holidayPeriodId));
 
         if (holidayPlan == null)
             throw new KeyNotFoundException("HolidayPlan not found");

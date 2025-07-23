@@ -65,10 +65,10 @@ builder.Services.AddAutoMapper(cfg =>
 // MassTransit
 builder.Services.AddMassTransit(x =>
 {
-    x.AddConsumer<HolidayPeriodConsumer>();
-    x.AddConsumer<HolidayPlanConsumer>();
-    x.AddConsumer<CollaboratorConsumer>();
-
+    x.AddConsumer<HolidayPeriodCreatedConsumer>();
+    x.AddConsumer<HolidayPeriodUpdatedConsumer>();
+    x.AddConsumer<HolidayPlanCreatedConsumer>();
+    x.AddConsumer<CollaboratorCreatedConsumer>();
 
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -76,9 +76,10 @@ builder.Services.AddMassTransit(x =>
         var instance = InstanceInfo.InstanceId;
         cfg.ReceiveEndpoint($"holidays-cmd-{instance}", e =>
         {
-            e.ConfigureConsumer<HolidayPeriodConsumer>(context);
-            e.ConfigureConsumer<HolidayPlanConsumer>(context);
-            e.ConfigureConsumer<CollaboratorConsumer>(context);
+            e.ConfigureConsumer<HolidayPeriodCreatedConsumer>(context);
+            e.ConfigureConsumer<HolidayPeriodUpdatedConsumer>(context);
+            e.ConfigureConsumer<HolidayPlanCreatedConsumer>(context);
+            e.ConfigureConsumer<CollaboratorCreatedConsumer>(context);
         });
     });
 });
